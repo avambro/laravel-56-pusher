@@ -47350,7 +47350,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     }).catch(function (err) {});
 
     //could be called as e => (and read all properties of e)
-    window.Echo.channel("tasks").listen("TaskCreated", function (_ref) {
+    window.Echo.channel("tasks." + this.project.id).listen("TaskCreated", function (_ref) {
       var task = _ref.task;
 
       _this.tasks.push(task.body);

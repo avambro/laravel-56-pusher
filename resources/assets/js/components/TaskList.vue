@@ -38,9 +38,12 @@ export default {
       .catch(err => {});
 
     //could be called as e => (and read all properties of e)
-    window.Echo.channel("tasks").listen("TaskCreated", ({ task }) => {
-      this.tasks.push(task.body);
-    });
+    window.Echo.channel("tasks." + this.project.id).listen(
+      "TaskCreated",
+      ({ task }) => {
+        this.tasks.push(task.body);
+      }
+    );
   },
   methods: {
     addTask() {
