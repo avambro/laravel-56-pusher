@@ -1,8 +1,8 @@
 <?php
 
-use App\Events\OrderStatusUpdated;
 use App\Tasks;
 use App\Events\TaskCreated;
+use App\Project;
 
 /*
 |--------------------------------------------------------------------------
@@ -14,29 +14,14 @@ use App\Events\TaskCreated;
 | contains the "web" middleware group. Now create something great!
 |
 */
-/*
-Route::get('/', function () {
-    OrderStatusUpdated::dispatch();
-    return view('welcome');
-});*/
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
 
 Route::get('/', function () {
     return view('welcome');
 });
-
-/*
-Route::get('/tasks', function () {
-    return Tasks::latest()->pluck('body');
-});
-
-Route::post('/tasks', function () {
-    $task = Tasks::forceCreate(request(['body']));
-
-    //Important to add dontBroadcastToCurrentUser , because it avoid to send
-    //the notification to the same user
-    event(new TaskCreated($task));
-});
-*/
 
 Route::get('/projects/{project}', function (Project $project) {
     $project->load('tasks');
