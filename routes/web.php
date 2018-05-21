@@ -15,23 +15,36 @@ use App\Project;
 |
 */
 
-Auth::routes();
-
-Route::get('/home', 'HomeController@index')->name('home');
-
-Route::get('/', function () {
-    return view('welcome');
-});
 
 Route::get('/projects/{project}', function (Project $project) {
-    $project->load('tasks');
-    return view('project.show', compact('project'));
+
+    $tasks = $project->load('tasks');
+    return view('welcome', compact('tasks'));
 });
+
+Auth::routes();
+Route::get('/home', 'HomeController@index')->name('home');
+
+
+
+
+Route::get('/', function () {
+    //return view('welcome');
+    return 'hello home';
+});
+
+
+
+
 
 //api
 Route::get('/api/projects/{project}', function (Project $project) {
+
     return $project->tasks->pluck('body');
+
 });
+
+
 Route::post('/api/projects/{project}/tasks', function (Project $project) {
     $task = $project->tasks()->create(request(['body']));
     event(new TaskCreated($task));

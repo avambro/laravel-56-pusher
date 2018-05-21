@@ -16,6 +16,6 @@ Broadcast::channel('App.User.{id}', function ($user, $id) {
 });
 */
 
-Broadcast::channel('tasks.{projectId}', function ($user, $projectId) {
+Broadcast::channel('tasks.{project_id}', function ($user, $projectId) {
     return true;
 });

@@ -19,8 +19,12 @@ class TaskCreated implements ShouldBroadcast
      *
      * @return void
      */
+
+    private $task;
+     
     public function __construct($task)
     {
+
         $this->task = $task;
 
         //Important to add dontBroadcastToCurrentUser , because it avoid to send
@@ -37,6 +41,7 @@ class TaskCreated implements ShouldBroadcast
     {
         //return new Channel('tasks');
         //to add unique channel for every "model" ID
-        return new PrivateChannel('tasks.' . $this->task->project_id);
+        \Log::info('- [Tasks]:: '.$this->task['project_id']);
+        return new PrivateChannel('tasks.' . $this->task['project_id']);
     }
 }

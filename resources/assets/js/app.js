@@ -8,6 +8,24 @@
 require('./bootstrap');
 
 window.Vue = require('vue');
+/*
+import Echo from 'laravel-echo'
+window.Pusher = require('pusher-js');
+
+window.Echo = new Echo({
+    broadcaster: 'pusher',
+    key: '760304ae67eaad314a5b',
+    cluster: 'us2',
+    auth:
+    {
+        headers:
+        {
+            'Authorization': 'Bearer ' + jwtToken.getToken()
+        }
+    }
+});
+*/
+
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
@@ -20,3 +38,5 @@ Vue.component('task-list', require('./components/taskList.vue'));
 const app = new Vue({
     el: '#app'
 });
+
+

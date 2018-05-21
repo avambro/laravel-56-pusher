@@ -11,6 +11,7 @@
                         </ul>
 
                         <input type="text" v-model="newTask" @blur="addTask">
+                        <button @onclick="addTask()">Add</button>
                     </div>
                 </div>
             </div>
@@ -23,34 +24,40 @@ export default {
   data() {
     return {
       tasks: [],
-      newTask: ""
+      newTask: "",
+      project:[
+                {'id':1}
+      ]
     };
   },
   mounted() {
-    console.log("Component mounted.");
+    
   },
   created() {
+
+    
     axios
-      .get("/tasks")
-      .then(result => {
+      .get("/api/projects/1")
+      .then(result => {        
         this.tasks = result.data;
       })
-      .catch(err => {});
+      .catch(err => {
+
+      });
 
     //could be called as e => (and read all properties of e)
-    window.Echo.private("tasks." + this.project.id).listen(
-      "TaskCreated",
-      ({ task }) => {
+    window.Echo.private("tasks." + this.project.id).
+    listen("TaskCreated",({ task }) => {
         this.tasks.push(task.body);
       }
     );
   },
   methods: {
     addTask() {
-      axios.post("/tasks", { body: this.newTask });
+      axios.post("/api/projects/1/tasks", { body: this.newTask });
       this.tasks.push(this.newTask);
       this.newTask = "";
     }
   }
-};
+}; 
 </script>
